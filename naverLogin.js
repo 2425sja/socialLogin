@@ -70,7 +70,7 @@ app.get("/callback", async function (req, res) {
 
     console.log("userData", userData);
   }
-  return res.redirect("/naverlogin");
+  return res.send("로그인 성공, 랜드페이지로 이동하기");
   // request.get(options, function (error, response, body) {
   //   if (!error && response.statusCode == 200) {
   //     res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
