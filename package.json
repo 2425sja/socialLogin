@@ -1,0 +1,30 @@
+{
+  "name": "sociallogin",
+  "version": "1.0.0",
+  "description": "https://developers.naver.com/apps/#/list",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node --presets=@babel/preset-env -- src/init.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2425sja/socialLogin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2425sja/socialLogin/issues"
+  },
+  "homepage": "https://github.com/2425sja/socialLogin#readme"
+}
