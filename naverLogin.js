@@ -54,7 +54,6 @@ app.get("/callback", async function (req, res) {
       headers: {
         "X-Naver-Client-Id": client_id,
         "X-Naver-Client-Secret": client_secret,
-        Accept: "application/json",
       },
     })
   ).json();
