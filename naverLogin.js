@@ -2,11 +2,13 @@ const fetch = require("node-fetch");
 
 var express = require("express");
 var app = express();
+
 var client_id = "vzaCBhI3kCgvN9TIf1YN";
 var client_secret = "2pO3T09zTK";
 var state = "RAMDOM_STATE";
 var redirectURI = encodeURI("http://127.0.0.1:3000/callback");
 var api_url = "";
+
 app.get("/naverlogin", function (req, res) {
   api_url =
     "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
@@ -22,6 +24,7 @@ app.get("/naverlogin", function (req, res) {
       "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>"
   );
 });
+
 app.get("/callback", async function (req, res) {
   const code = req.query.code;
   const state = req.query.state;
@@ -83,6 +86,7 @@ app.get("/callback", async function (req, res) {
   //   }
   // });
 });
+
 app.listen(3000, function () {
   console.log("http://127.0.0.1:3000/naverlogin app listening on port 3000!");
 });
