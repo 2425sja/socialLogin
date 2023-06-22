@@ -14,7 +14,8 @@
     "nodemon": "^2.0.22"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node naverLogin.js"
+    "dev2": "nodemon --exec babel-node 2_Nlogin_accessToken.js",
+    "dev3": "nodemon --exec babel-node 3_Nlogin_Final.js"
   },
   "repository": {
     "type": "git",

@@ -38,6 +38,7 @@ app.get("/callback", async function (req, res) {
     code +
     "&state=" +
     state;
+
   // var request = require("request");
   // var options = {
   //   url: api_url,
@@ -47,29 +48,6 @@ app.get("/callback", async function (req, res) {
   //   },
   // };
 
-  const response = await fetch(api_url, {
-    headers: {
-      "X-Naver-Client-Id": client_id,
-      "X-Naver-Client-Secret": client_secret,
-    },
-  });
-
-  const tokenRequest = await response.json();
-
-  if ("access_token" in tokenRequest) {
-    const { access_token } = tokenRequest;
-    const apiUrl = "https://openapi.naver.com/v1/nid/me";
-
-    const data = await fetch(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-
-    const userData = await data.json();
-    console.log("userData", userData);
-  }
-  return res.send("로그인 성공, 랜드페이지로 이동하기");
   // request.get(options, function (error, response, body) {
   //   if (!error && response.statusCode == 200) {
   //     res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
@@ -81,6 +59,17 @@ app.get("/callback", async function (req, res) {
   //     console.log("error = " + response.statusCode);
   //   }
   // });
+
+  const response = await fetch(api_url, {
+    headers: {
+      "X-Naver-Client-Id": client_id,
+      "X-Naver-Client-Secret": client_secret,
+    },
+  });
+
+  const tokenRequest = await response.json();
+
+  return res.send(tokenRequest);
 });
 
 app.listen(3000, function () {
