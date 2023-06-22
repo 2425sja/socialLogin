@@ -1,14 +1,14 @@
+//코드 동작하게 최소한만 수정한 코드
+
 const fetch = require("node-fetch");
 
 var express = require("express");
 var app = express();
-
 var client_id = "vzaCBhI3kCgvN9TIf1YN";
 var client_secret = "2pO3T09zTK";
-var state = "RAMDOM_STATE";
+var state = "RAMDOM_STATE-anyword";
 var redirectURI = encodeURI("http://127.0.0.1:3000/callback");
 var api_url = "";
-
 app.get("/naverlogin", function (req, res) {
   api_url =
     "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
@@ -24,7 +24,6 @@ app.get("/naverlogin", function (req, res) {
       "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>"
   );
 });
-
 app.get("/callback", async function (req, res) {
   const code = req.query.code;
   const state = req.query.state;
@@ -48,28 +47,26 @@ app.get("/callback", async function (req, res) {
   //   },
   // };
 
-  const tokenRequest = await (
-    await fetch(api_url, {
-      method: "POST",
-      headers: {
-        "X-Naver-Client-Id": client_id,
-        "X-Naver-Client-Secret": client_secret,
-      },
-    })
-  ).json();
+  const response = await fetch(api_url, {
+    headers: {
+      "X-Naver-Client-Id": client_id,
+      "X-Naver-Client-Secret": client_secret,
+    },
+  });
+
+  const tokenRequest = await response.json();
 
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
     const apiUrl = "https://openapi.naver.com/v1/nid/me";
-    const userData = await (
-      await fetch(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-    ).json();
-    // console.log("access_token", access_token);
 
+    const data = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    const userData = await data.json();
     console.log("userData", userData);
   }
   return res.send("로그인 성공, 랜드페이지로 이동하기");
